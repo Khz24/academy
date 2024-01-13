@@ -50,16 +50,16 @@ class Course(models.Model):
 
 
 class StudentCourse(models.Model):
-    student = models.ForeignKey(Student, on_delete=models)
-    course = models.ForeignKey(Course, on_delete=models)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=False)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=False)
 
     def __str__(self):
         return self.student
 
 
 class StudentProfile(models.Model):
-    student = models.ForeignKey(Student, on_delete=models)
-    course = models.ForeignKey(Course, on_delete=models)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=False)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=False)
 
     def __str__(self):
         return self.student
