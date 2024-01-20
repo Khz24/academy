@@ -12,14 +12,13 @@ class Level(models.Model):
 
     class Meta:
         verbose_name_plural = 'مقاطع تحصیلی'
-        verbose_name = 'مقطع تحصیلی'
+        verbose_name = 'مقطع تحصیلی Level'
 
 
 class Student(models.Model):
     name = models.CharField(max_length=30)
     family = models.CharField(max_length=30, null=True)
     student_id = models.IntegerField(null=False, unique=True)
-    student_level = models.ForeignKey(Level, on_delete=models.CASCADE, null=False)
     sex = models.CharField(max_length=3, null=False, default='مرد')
     birth_date = models.DateField()
     status = models.BooleanField(default=True)
@@ -49,18 +48,13 @@ class Course(models.Model):
         index_together = ('name', 'level')
 
 
-class StudentCourse(models.Model):
+class StudentLevel(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=False)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=False)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE, null=False)
 
     def __str__(self):
-        return self.student
+        return self.student_id
 
-
-class StudentProfile(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=False)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=False)
-
-    def __str__(self):
-        return self.student
-
+    class Meta:
+        verbose_name_plural = 'Student-Levels'
+        verbose_name = 'Student-Level'
